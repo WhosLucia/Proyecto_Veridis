@@ -138,7 +138,7 @@ function crearEstilos(colors: ThemeColors) {
   return StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.background ?? '#F2F0E9',
   },
 
   scrollContent: {

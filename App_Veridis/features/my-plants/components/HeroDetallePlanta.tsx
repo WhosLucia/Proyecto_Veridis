@@ -63,7 +63,9 @@ function crearEstilos(colors: ThemeColors) {
     borderBottomLeftRadius: 34,
     borderBottomRightRadius: 34,
     overflow: 'hidden',
-    backgroundColor: colors.surfaceSoft,
+    backgroundColor: colors.surfaceSoft ?? '#F1F7EA',
+    zIndex: 2,
+    elevation: 1,
   },
 
   image: {

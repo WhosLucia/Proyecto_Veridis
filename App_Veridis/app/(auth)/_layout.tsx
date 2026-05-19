@@ -2,6 +2,7 @@
 
 import { router, Stack } from 'expo-router';
 import { useEffect } from 'react';
+import { View } from 'react-native';
 
 import { useUsuario } from '@/features/user/context/UserContext';
 import { useColoresTema } from '@/theme/useColoresTema';
@@ -20,7 +21,9 @@ export default function DisenoAutenticacion() {
   }, [loadingUser, user]);
 
   if (loadingUser || user) {
-    return null;
+    // Cubrir con un View opaco en lugar de devolver null evita que pantallas
+    // del stack auth queden visibles por debajo de otras tras el login.
+    return <View style={{ flex: 1, backgroundColor: colors.background ?? '#F2F0E9' }} />;
   }
 
   return (
