@@ -12,7 +12,12 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Restaglick.ttf"]
+        }
+      ],
       "expo-location",
       [
         "expo-image-picker",
