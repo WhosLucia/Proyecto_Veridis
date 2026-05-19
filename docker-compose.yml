@@ -1,0 +1,47 @@
+# Stack Veridis: MySQL + API Spring Boot.
+# Sirve igual para local y para la VM de Oracle Cloud.
+# Variables sensibles en .env (no commitear).
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: veridis_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: veridis
+    volumes:
+      - veridis_mysql_data:/var/lib/mysql
+      # Solo se ejecuta cuando el volumen está vacío (primer arranque).
+      - ./db_init:/docker-entrypoint-initdb.d:ro
+    ports:
+      # Solo localhost del host, para depurar con MySQL Workbench/CLI.
+      # En la VM de Oracle puedes comentar esta línea para no exponer la BD.
+      - "127.0.0.1:3308:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  api:
+    build:
+      context: ./API_Veridis
+    container_name: veridis_api
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/veridis?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Madrid
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SERVER_PORT: 8082
+    ports:
+      - "8082:8082"
+    volumes:
+      - veridis_uploads:/app/uploads
+
+volumes:
+  veridis_mysql_data:
+  veridis_uploads:

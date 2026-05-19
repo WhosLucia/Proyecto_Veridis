@@ -1,0 +1,12 @@
+target/*
+!target/api-0.0.1-SNAPSHOT.jar
+.idea/
+.vscode/
+*.iml
+*.bak
+.git/
+.gitignore
+HELP.md
+mvnw
+mvnw.cmd
+.mvn/

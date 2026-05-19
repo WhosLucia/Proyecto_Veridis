@@ -1,0 +1,17 @@
+# Secretos
+.env
+_oci_keys/
+
+# Rollbacks (snapshots locales, no van al repo)
+_rollback_*/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs locales
+*.log
