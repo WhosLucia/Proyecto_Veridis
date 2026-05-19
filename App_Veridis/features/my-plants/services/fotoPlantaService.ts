@@ -49,12 +49,19 @@ async function publicarFotoMultipart(formData: FormData) {
   return data as ApiFotoPlanta;
 }
 
+function aUrlAbsoluta(url: string | null): string | null {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('file://') || url.startsWith('data:')) return url;
+  if (url.startsWith('/')) return `${API_BASE_URL}${url}`;
+  return url;
+}
+
 // Adapta datos de la API al formato que espera la app.
 function mapearFotoPlanta(foto: ApiFotoPlanta): FotoPlanta {
   return {
     id_foto: foto.idFoto,
     id_usuario_planta: 0,
-    url_imagen: foto.urlImagen,
+    url_imagen: aUrlAbsoluta(foto.urlImagen) ?? foto.urlImagen,
     fecha: foto.fecha,
   };
 }

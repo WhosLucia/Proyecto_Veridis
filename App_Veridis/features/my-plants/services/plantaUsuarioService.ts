@@ -1,7 +1,15 @@
 // Codigo propio de App_Veridis. Mantiene una responsabilidad concreta dentro de la app.
 
+import { API_BASE_URL } from '@/config/api';
 import { apiClient } from '@/services/api/apiClient';
 import { endpoints } from '@/services/api/endpoints';
+
+function aUrlAbsoluta(url: string | null): string | null {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('file://') || url.startsWith('data:')) return url;
+  if (url.startsWith('/')) return `${API_BASE_URL}${url}`;
+  return url;
+}
 import {
   actualizarNotificationIdRecordatorio,
   type ApiRecordatorio,
@@ -65,7 +73,7 @@ function mapearPlanta(planta: ApiPlantaUsuario['planta']): Planta {
     nombre_cientifico: planta.nombreCientifico,
     tipo: normalizarOpcion(planta.tipo, 'interior') as Planta['tipo'],
     descripcion: planta.descripcion,
-    url_img_default: planta.urlImgDefault,
+    url_img_default: aUrlAbsoluta(planta.urlImgDefault),
     apta_exterior_temp: planta.aptaExteriorTemp ? 1 : 0,
     luz_recomendada: normalizarOpcion(planta.luzRecomendada, 'luz_indirecta') as Planta['luz_recomendada'],
     humedad_recomendada: normalizarOpcion(planta.humedadRecomendada, 'media') as Planta['humedad_recomendada'],
