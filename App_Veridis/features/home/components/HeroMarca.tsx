@@ -71,8 +71,8 @@ function crearEstilos(colors: ThemeColors) {
 
     brandName: {
       color: colors.text,
-      fontFamily: 'Restaglick',
       fontSize: 64,
+      fontWeight: '700',
     },
 
     brandSubtitle: {

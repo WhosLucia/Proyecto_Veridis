@@ -2,17 +2,16 @@
 .env
 _oci_keys/
 
-# Rollbacks (snapshots locales, no van al repo)
+# Carpetas locales temporales / snapshots
 _rollback_*/
+_temp/
 
-# Logs y registros de desarrollo
-CHAT_LOG.md
+# Notas y logs locales
 *.log
 
 # IDE
 .idea/
 .vscode/
-.claude/
 
 # OS
 Thumbs.db
@@ -27,5 +26,5 @@ Thumbs.db
 # Java / Maven
 **/target/
 
-# Docker (datos locales no van al repo)
+# Datos de inicialización Docker (no se versionan)
 db_init/
