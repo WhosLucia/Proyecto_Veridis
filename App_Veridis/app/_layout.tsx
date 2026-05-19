@@ -1,9 +1,9 @@
 // Codigo propio de App_Veridis. Mantiene una responsabilidad concreta dentro de la app.
 
 import { Stack } from 'expo-router';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ProveedorTemaApp } from '@/features/theme/context/AppThemeContext';
 import { ProveedorUsuario } from '@/features/user/context/UserContext';
@@ -13,18 +13,28 @@ SplashScreen.preventAutoHideAsync();
 
 // Punto de entrada de esta pantalla o layout.
 export default function DisenoRaiz() {
-  const [fontsLoaded, fontError] = useFonts({
-    Restaglick: require('../assets/fonts/Restaglick.ttf'),
-  });
+  const [appReady, setAppReady] = useState(false);
 
   // Efecto que sincroniza el estado de la pantalla con datos externos o cambios del usuario.
   useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
+    async function prepararApp() {
+      try {
+        await Font.loadAsync({
+          Restaglick: require('../assets/fonts/Restaglick.ttf'),
+        });
+        console.log('[Veridis] Fuente Restaglick cargada correctamente');
+      } catch (error) {
+        console.warn('[Veridis] Error cargando Restaglick:', error);
+      } finally {
+        setAppReady(true);
+        SplashScreen.hideAsync();
+      }
     }
-  }, [fontError, fontsLoaded]);
 
-  if (!fontsLoaded && !fontError) {
+    prepararApp();
+  }, []);
+
+  if (!appReady) {
     return null;
   }
 
