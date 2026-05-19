@@ -5,13 +5,27 @@ _oci_keys/
 # Rollbacks (snapshots locales, no van al repo)
 _rollback_*/
 
+# Logs y registros de desarrollo
+CHAT_LOG.md
+*.log
+
 # IDE
 .idea/
 .vscode/
+.claude/
 
 # OS
 Thumbs.db
 .DS_Store
 
-# Logs locales
-*.log
+# Node / Expo / Metro (defensiva por si el .gitignore interno falla)
+**/node_modules/
+**/.expo/
+**/dist/
+**/web-build/
+
+# Java / Maven
+**/target/
+
+# Docker (datos locales no van al repo)
+db_init/

@@ -1,0 +1,40 @@
+# Node / npm / yarn
+node_modules/
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+package-lock.json.bak
+
+# Expo
+.expo/
+.expo-shared/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native (no generado en este proyecto)
+ios/
+android/
+
+# Metro
+.metro-health-check*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Variables de entorno (contienen URL de API local)
+.env
+.env*.local
+
+# Build artifacts
+*.tgz
+*.tar.gz

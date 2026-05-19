@@ -1,0 +1,5 @@
+/* Estilos globales que activan las capas de Tailwind usadas por NativeWind. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
