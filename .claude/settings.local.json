@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(rm -rf \"C:/Users/lulyl/Desktop/Veridis/App_Veridis/.git\" \"C:/Users/lulyl/Desktop/Veridis/App_Veridis/.gitignore\" && ls -la \"C:/Users/lulyl/Desktop/Veridis/App_Veridis\" | grep -i git ; echo \"done\")"
-    ]
-  }
-}
